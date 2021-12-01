@@ -1,5 +1,6 @@
+depth_increase_count = 0
+
 with open('1-input.txt', 'r') as f:
-    depth_increase_count = 0
     depth = int(f.readline())
     print(depth, '-')
 
