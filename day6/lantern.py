@@ -14,6 +14,14 @@ def day(fishes):
     # print(out)
     return out
 
+def breeding(initial_fish_timer_counts, num_days):
+    total_fish_at_end = 0
+    for timer, fish_count in initial_fish_timer_counts:
+        total_fish_at_end += 2 ** (num_doublings(timer, num_days) - 1)
+    return total_fish_at_end
+
+def num_doublings(timer, num_days):
+    return (num_days - 6) // 8
 
 def line_to_counts(line):
     return Counter(int(num) for num in line.split(','))

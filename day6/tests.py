@@ -1,13 +1,14 @@
 import unittest
 
-from lantern import day, line_to_counts
+from lantern import breeding, num_doublings
 
 
 class TestLantern(unittest.TestCase):
-    def test_count_down(self):
-        self.assertEqual(
-            day(line_to_counts('3')),
-                line_to_counts('2'))
+    def test_num_doublings(self):
+        self.assertEqual(num_doublings(2, 1), 0)
+        self.assertEqual(num_doublings(2, 2), 0)
+        self.assertEqual(num_doublings(2, 3), 1)
+        self.assertEqual(num_doublings(2, 3), 1)
 
     def test_count_down_consecutive(self):
         self.assertEqual(
@@ -46,10 +47,9 @@ class TestLantern(unittest.TestCase):
 6,0,6,4,5,6,0,1,1,2,6,0,1,1,1,2,2,3,3,4,6,7,8,8,8,8
 '''.strip().split()
         examples = [line_to_counts(line) for line in examples]
-        yesterday = examples[0]
-        for today in examples[1:]:
-            self.assertEqual(day(yesterday), today)
-            yesterday = today
+        initial_fish_timer_counts = examples[0]
+        for num_days, today in enumerate(examples):
+            self.assertEqual(breeding(initial_fish_timer_counts, num_days), today.total())
 
 if __name__ == '__main__':
     unittest.main()
